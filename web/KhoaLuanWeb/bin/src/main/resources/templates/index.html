@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+
+<head>
+	<title>Trang Chủ</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} " />
+	<link th:rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css} " />
+</head>
+
+<body>
+	<div class="container">
+		<!-- <div class="sign-trang-chu">
+
+			<div class="menu_top">
+				<ul class="menu_ul">
+					<li><a href="#">Trang chủ</a></li>
+					<li><a href="#dichvu">Dịch vụ</a></li>
+					<li><a th:href="@{/dang-nhap}">Đăng nhập</a>
+					</li>
+					<li><a th:href="@{/thong-tin}">Thong tin ca nhan</a></li>
+					<li><a th:href="@{/doimatkhau}">Đổi mật khẩu</a></li>
+				</ul>
+
+			</div>
+		</div> -->
+
+		<div class="wrapper">
+			<nav class="menu">
+				<ul class="clearfix">
+					<li><a href="#">Trang chủ</a></li>
+					<li><a href="#dichvu">Dịch vụ</a></li>
+					
+			<th:block th:switch="${chucvu}"> 
+			  <th:block th:case="null">
+			  		
+			  		<li ><a th:href="@{/dang-nhap}">Đăng Nhập</a></li>
+			  	</th:block>
+			  <th:block th:case="'NHANVIEN'">
+			  	<!--	<th:block th:if="${#strings.equals(chucvu,'NhanVien')}">		  -->
+			  		
+						<li style="padding-top: 0.3em">
+									<a id="idnguoidung" href="" th:text="${#authentication.name}"   th:if="${#authentication.name !=null}" ></a>
+									<img class="anhdn" src="/images/user.svg"  style="width: 1.5em;height:1.5em;padding: 0;"
+    							 			th:attr="src=@{/images/user.svg},title=#{logo},alt=#{logo}" /> 
+									<ul class="dangxuat_menu">
+						  				
+										<li><a th:href="@{/logout}" method="post">Đăng Xuất</a></li>
+										<li style="text-align: left;"><a th:href="@{/nhan-vien/thongTinNhanVien}" method="post" >Thông Tin Cá Nhân</a></li>
+										<!--  <li><a th:href="@{/lichLamViec}" method="post" >Xem Lịch Làm Việc</a></li>-->
+									</ul>
+						</li>
+				<!--  	</th:block>  -->
+				<!--	<th:block th:unless="${#strings.equals(chucvu,'NhanVien')}">  -->
+			  </th:block>
+			  <th:block  th:case ="'Bệnh Nhân'">
+						<li>
+						<a href="#" th:text="${#authentication.name}"><span class="arrow">&#9660;</span></a>
+		 
+						<ul class="sub-menu">
+							<li><a href="#">Đăng xuất</a></li>
+							<li><a th:href="@{/thong-tin}">Thong tin ca nhan</a></li>
+							<li><a th:href="@{/doimatkhau}">Đổi mật khẩu</a></li>
+						</ul>
+					</li>
+						 
+			  </th:block>
+			  <th:block  th:case ="'Bác Sỹ'">
+			  			<li>
+									<a id="idnguoidung" href="" th:text="${#authentication.name}"   th:if="${#authentication.name !=null}" ></a>
+									<ul class="sub-menu">
+										<li><a href="#">Đăng xuất</a></li>
+										<li><a th:href="@{/thong-tin}">Thong tin ca nhan</a></li>
+										<li><a href="#">Tôi là Bác Sỹ của Phòng Khám</a></li>
+									</ul>
+						</li>
+			  </th:block>
+		      <th:block  th:case ="*">
+		     	<li style="background-color:#16C2F5 !important;"><li>
+	   	      </th:block>
+			
+			</th:block>
+					<li><a href="#">Liên hệ</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="dshinhanh">
+
+			<img th:src="@{/images/Group 3387.jpg}" class="hinhanh" /> <span class="hinhtron"></span> <span
+				class="hinhtron"></span> <span class="hinhtron"></span>
+
+		</div>
+		<div class="gioithieu">
+			<div class="gioithieu_title">
+				<h3>Giới Thiệu Về Phòng Khám</h3>
+			</div>
+			<div class="gioithieu_noidung">
+				<div class="row">
+					<div class="col-sm">
+						<img th:src="@{/images/giaodien1.jpg}" class="hinhanh" />
+					</div>
+					<div class="col-sm">
+						<div>Việc sử dụng các bằng chứng trong thế giới thực là cần
+							thiết cho một nghiên cứu lâm sàng hiệu quả. Trong lĩnh vực y tế,
+							các công ty dược phẩm và công nghệ sinh học không ngừng thúc đẩy
+							việc cấp phép để thương mại hóa nhanh chóng trong khi vẫn duy trì
+							mức giá cạnh tranh, vì vậy việc có bằng chứng thực tế làm nguồn
+							lực cho nghiên cứu và thử nghiệm lâm sàng của họ trở nên cực kỳ
+							quan trọng để đạt được lợi thế cạnh tranh.</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="doingubacsi">
+				<div class="doingubacsi_title">
+					<h3>Đội Ngũ Bác Sĩ</h3>
+				</div>
+				<div class="doingubacsi_dsbacsi">
+					<img th:src="@{/images/giaodien2.jpg}" class="hinhanh" />
+				</div>
+
+			</div>
+			<div class="dichvu">
+				<div class="dichvu_title">
+					<h3>Dịch Vụ</h3>
+				</div>
+				<div class="dichvu_dscacdv" id="dichvu">
+					<div class="dv_datlich">
+						<a th:href="@{/dat-lich}">
+							<h3>Đặt lịch hẹn</h3>
+						</a>
+
+					</div>
+					<div class="dichvu_dsCTdv"></div>
+				</div>
+
+			</div>
+			<div class="footer">
+
+				<div class="thongtinlienhe">
+					<h5>Phòng khám điện biên phủ</h5>
+					<address>456 2 Bà Trưng quận 1, Thành Phố Hồ Chí Minh</address>
+					<p>Số điện thoại : 0965651375</p>
+
+				</div>
+			</div>
+		</div>
+
+		<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+		<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+		<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
